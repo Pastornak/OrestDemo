@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TabLayout tabLayout;
     private RecipeList recipeList;
 
     @Override
@@ -19,10 +18,7 @@ public class MainActivity extends AppCompatActivity {
         recipeList = new RecipeList();
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
+        setUpTabs(tabLayout);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.screen);
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
@@ -44,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setUpTabs(TabLayout tabLayout){
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.collection));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.list));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.favorite));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.bucket));
     }
 
     public ArrayList<Recipe> getRecipesList(){

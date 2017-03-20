@@ -17,7 +17,7 @@ public class CollectionFragment extends Fragment {
 
     private GridView collectionView;
     private ArrayList<Recipe> recipes;
-    SearchView findRecipe;
+    private SearchView findRecipe;
     private CollectionAdapter collectionAdapter;
 
     @Override
@@ -25,12 +25,17 @@ public class CollectionFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.collection_view_fragment, container, false);
-        getActivity().setTitle("Menu");
+        getActivity().setTitle(R.string.main_menu);
 
-        FragmentActivity activity = getActivity();
-        MainActivity mainActivity = (MainActivity) activity;
-        recipes = mainActivity.getRecipesList();
+        recipes = ((MainActivity) getActivity()).getRecipesList();
 
+        setUpCollection(view);
+        setUpSearching(view);
+
+        return view;
+    }
+
+    private void setUpCollection(View view){
         collectionView = (GridView) view.findViewById(R.id.collection_view);
         collectionAdapter = new CollectionAdapter(getContext(), recipes);
         collectionView.setAdapter( collectionAdapter);
@@ -44,7 +49,9 @@ public class CollectionFragment extends Fragment {
 
             }
         });
+    }
 
+    private void setUpSearching(View view){
         findRecipe = (SearchView) view.findViewById(R.id.searchRecipe);
         findRecipe.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -58,7 +65,5 @@ public class CollectionFragment extends Fragment {
                 return false;
             }
         });
-        return view;
     }
-
 }

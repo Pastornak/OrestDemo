@@ -1,7 +1,6 @@
 package id_iot.demo;
 
 import android.content.Context;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +9,17 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Filter;
-import android.widget.Filterable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionAdapter extends BaseAdapter implements Filterable {
-    private Context mContext;
+    private Context context;
     private ArrayList<Recipe> recipes;
     private ArrayList<Recipe> backupRecipes;
-    ValueFilter valueFilter;
+    private ValueFilter valueFilter;
 
-    public CollectionAdapter(Context c, ArrayList<Recipe> recipes) {
-        mContext = c;
+    public CollectionAdapter(Context context, ArrayList<Recipe> recipes) {
+        this.context = context;
         this.recipes = recipes;
         this.backupRecipes = recipes;
     }
@@ -43,7 +41,7 @@ public class CollectionAdapter extends BaseAdapter implements Filterable {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        final LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(R.layout.collection_view_cell, null);
 
         ImageView recipePhoto = (ImageView) convertView.findViewById(R.id.collection_image);
@@ -52,7 +50,7 @@ public class CollectionAdapter extends BaseAdapter implements Filterable {
         TextView recipeDetail = (TextView) convertView.findViewById(R.id.collection_detail);
         recipeName.setText(recipes.get(position).getRecipeName());
         recipeDetail.setText(recipes.get(position).getRecipeDetail());
-        favoriteStar.setImageResource(recipes.get(position).getFavorite()? R.drawable.favorite_checked: R.drawable.favorite_unchecked_2);
+        favoriteStar.setImageResource(recipes.get(position).getFavorite()? R.drawable.favorite_checked: R.drawable.favorite_unchecked);
         recipePhoto.setImageResource(recipes.get(position).getRecipePhoto());
         return convertView;
     }
@@ -75,15 +73,10 @@ public class CollectionAdapter extends BaseAdapter implements Filterable {
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
 
-            if (constraint != null && constraint.length() > 0) {
-                List<Recipe> filterList = new ArrayList<>();
-                for (Recipe recipe: recipes) {
-                    if ((recipe.getRecipeName().toUpperCase()).contains(constraint.toString().toUpperCase())) {
-                        filterList.add(recipe);
-                    }
-                }
-                results.count = filterList.size();
-                results.values = filterList;
+            if (!constraint.toString().isEmpty()){
+                List<Recipe> search = searchRecipeName(constraint, recipes);
+                results.count = search.size();
+                results.values = search;
             } else {
                 results.count = backupRecipes.size();
                 results.values = backupRecipes;
@@ -91,12 +84,24 @@ public class CollectionAdapter extends BaseAdapter implements Filterable {
             return results;
         }
 
+        private List<Recipe> searchRecipeName(CharSequence name, ArrayList<Recipe> recipes){
+            List<Recipe> filterList = new ArrayList<>();
+            for (Recipe recipe: recipes) {
+                if (checkNames(name.toString(), recipe.getRecipeName())){
+                    filterList.add(recipe);
+                }
+            }
+            return filterList;
+        }
+
+        private boolean checkNames(String toFindName, String recipeName){
+            return recipeName.toUpperCase().contains(toFindName.toUpperCase());
+        }
+
         @Override
-        protected void publishResults(CharSequence constraint,
-                                      FilterResults results) {
+        protected void publishResults(CharSequence constraint, FilterResults results) {
             recipes = (ArrayList) results.values;
             notifyDataSetChanged();
         }
-
     }
 }
