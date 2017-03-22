@@ -20,7 +20,7 @@ public class CategoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.recycler_view_category, container, false);
         getActivity().setTitle("Menu");
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_category);
 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);

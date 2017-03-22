@@ -2,6 +2,9 @@ package id_iot.demo;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -10,12 +13,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private RecipeList recipeList;
+    private Recipe chosenRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recipeList = new RecipeList();
+        chosenRecipe = recipeList.getRecipes().get(1);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         setUpTabs(tabLayout);
@@ -51,5 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<Recipe> getRecipesList(){
         return this.recipeList.getRecipes();
+    }
+
+    public Recipe getChosenRecipe(){return this.chosenRecipe;}
+
+    public void setChosenRecipe(Recipe chosenRecipe){
+        this.chosenRecipe = chosenRecipe;
     }
 }
