@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recipeList = new RecipeList();
-        chosenRecipe = recipeList.getRecipes().get(1);
+        //chosenRecipe = recipeList.getRecipes().get(0);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         setUpTabs(tabLayout);

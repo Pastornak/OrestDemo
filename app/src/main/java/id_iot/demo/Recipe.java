@@ -3,12 +3,14 @@ package id_iot.demo;
 public class Recipe {
     private String recipeName;
     private String recipeDetail;
+    private String recipeHowToCook;
     private int recipePhoto;
     private boolean favorite = false;
 
-    public Recipe(String name, String detail, int photo){
+    public Recipe(String name, String detail, String howToCook, int photo){
         this.recipeName = name;
         this.recipeDetail = detail;
+        this.recipeHowToCook = howToCook;
         this.recipePhoto = photo;
     }
 
@@ -19,6 +21,8 @@ public class Recipe {
     public String getRecipeDetail(){
         return this.recipeDetail;
     }
+
+    public String getRecipeHowToCook(){ return this.recipeHowToCook; }
 
     public int getRecipePhoto(){
         return this.recipePhoto;

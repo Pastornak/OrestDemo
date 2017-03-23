@@ -16,11 +16,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter{
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new ChosenRecipeFragment();
+                return new CollectionFragment();
             case 1:
                 return new Fragment();
             case 2:
-                return new Fragment();
+                return new ChosenRecipeFragment();
             case 3:
                 return new Fragment();
             default:

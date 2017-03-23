@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionAdapter extends BaseAdapter implements Filterable {
+    
     private Context context;
     private ArrayList<Recipe> recipes;
     private ArrayList<Recipe> backupRecipes;
@@ -23,7 +24,6 @@ public class CollectionAdapter extends BaseAdapter implements Filterable {
         this.recipes = recipes;
         this.backupRecipes = recipes;
     }
-
 
     @Override
     public long getItemId(int position) {

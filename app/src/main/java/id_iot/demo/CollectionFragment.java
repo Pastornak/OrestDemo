@@ -45,6 +45,7 @@ public class CollectionFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(view.getContext(),  collectionAdapter.getRecipes().get(i).getRecipeName(), Toast.LENGTH_SHORT).show();
                 collectionAdapter.getRecipes().get(i).changeFavorite();
+                ((MainActivity) getActivity()).setChosenRecipe(collectionAdapter.getRecipes().get(i));
                 collectionAdapter.notifyDataSetChanged();
 
             }
