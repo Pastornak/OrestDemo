@@ -36,17 +36,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i){
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_view_category, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(v);
-        return viewHolder;
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int position){
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_view_category, viewGroup, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int i){
-        viewHolder.itemName.setText(recipes.get(i).getRecipeName());
-        viewHolder.itemImage.setImageResource(recipes.get(i).getRecipePhoto());
+    public void onBindViewHolder(final ViewHolder viewHolder, int position){
+        viewHolder.itemName.setText(recipes.get(position).getRecipeName());
+        viewHolder.itemImage.setImageResource(recipes.get(position).getRecipePhoto());
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), recipes.get(viewHolder.getAdapterPosition()).getRecipeName(), Toast.LENGTH_SHORT).show();

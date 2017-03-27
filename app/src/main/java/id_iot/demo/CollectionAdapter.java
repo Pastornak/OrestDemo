@@ -73,13 +73,13 @@ public class CollectionAdapter extends BaseAdapter implements Filterable {
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
 
-            if (!constraint.toString().isEmpty()){
+            if (constraint.toString().isEmpty()){
+                results.count = backupRecipes.size();
+                results.values = backupRecipes;
+            } else {
                 List<Recipe> search = searchRecipeName(constraint, recipes);
                 results.count = search.size();
                 results.values = search;
-            } else {
-                results.count = backupRecipes.size();
-                results.values = backupRecipes;
             }
             return results;
         }

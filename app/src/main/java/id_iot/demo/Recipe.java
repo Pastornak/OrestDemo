@@ -5,7 +5,7 @@ public class Recipe {
     private String recipeDetail;
     private String recipeHowToCook;
     private int recipePhoto;
-    private boolean favorite = false;
+    private boolean favorite;
 
     public Recipe(String name, String detail, String howToCook, int photo){
         this.recipeName = name;
@@ -35,8 +35,7 @@ public class Recipe {
     public void changeFavorite(){
         if (this.favorite == false) {
             this.favorite = true;
-        }
-        else{
+        } else{
             this.favorite = false;
         }
     }

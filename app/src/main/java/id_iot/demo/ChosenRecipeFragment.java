@@ -22,11 +22,12 @@ public class ChosenRecipeFragment extends Fragment {
         getActivity().setTitle(chosenRecipe.getRecipeName());
 
         ImageView chosenRecipeImage = (ImageView) view.findViewById(R.id.chosen_recipe_image);
-        TextView chosenRecipeDetail = (TextView) view.findViewById(R.id.chosen_recipe_detail);
-        TextView chosenRecipeHTC = (TextView) view.findViewById(R.id.how_to_cook);
-
         chosenRecipeImage.setImageResource(chosenRecipe.getRecipePhoto());
+
+        TextView chosenRecipeDetail = (TextView) view.findViewById(R.id.chosen_recipe_detail);
         chosenRecipeDetail.setText(chosenRecipe.getRecipeDetail());
+
+        TextView chosenRecipeHTC = (TextView) view.findViewById(R.id.how_to_cook);
         chosenRecipeHTC.setText(chosenRecipe.getRecipeHowToCook());
 
         return view;

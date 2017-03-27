@@ -20,13 +20,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recipeList = new RecipeList();
-        //chosenRecipe = recipeList.getRecipes().get(0);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         setUpTabs(tabLayout);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.screen);
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        setUpView(viewPager, pagerAdapter, tabLayout);
+    }
+
+    private void setUpView(final ViewPager viewPager, PagerAdapter pagerAdapter, TabLayout tabLayout){
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
